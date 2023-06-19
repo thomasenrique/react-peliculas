@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import { landingPageDTO } from './peliculas/peliculas.model';
 import ListadoPeliculas from './peliculas/ListadoPeliculas';
+import Menu from './utils/Menu';
 
 
 function App() {
@@ -40,11 +41,15 @@ function App() {
 
   return (
     <>
-      <h3>En cartelera</h3>
-      <ListadoPeliculas peliculas={peliculas.enCartelera} />
+      <Menu />
+      <div className='container'>
 
-      <h3>Próximos Estrenos</h3>
-      <ListadoPeliculas peliculas={peliculas.proximosEstrenos} />
+        <h3>En cartelera</h3>
+        <ListadoPeliculas peliculas={peliculas.enCartelera} />
+
+        <h3>Próximos Estrenos</h3>
+        <ListadoPeliculas peliculas={peliculas.proximosEstrenos} />
+      </div>
     </>
   );
 }
