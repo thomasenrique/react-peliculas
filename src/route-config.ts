@@ -14,30 +14,31 @@ import FiltroPelioculas from './peliculas/FiltroPeliculas';
 import RedireccionarALanding from './utils/RedireccionarALading';
 
 const rutas: ruta[] = [
-    { path: '/', componente: LandingPage },
-
+    
     { path: '/generos/crear', componente: CrearGenero },
-    { path: '/generos/editar:id', componente: EditarGenero },
-    { path: '/generos', componente: IndiceGeneros },
-
+    { path: '/generos/editar/:id(\\d+)', componente: EditarGenero },
+    { path: '/generos', componente: IndiceGeneros, exact: true },
+    
     { path: '/actores/crear', componente: CrearActores },
-    { path: '/actores/editar:id', componente: EditarActores },
-    { path: '/actores', componente: IndiceActores },
-
-    { path: '/cine/crear', componente: CrearCine },
-    { path: '/cine/editar:id', componente: EditarCine },
-    { path: '/cine', componente: IndiceCine },
-
-    { path: '/pelicula/crear', componente: CrearPelicula },
-    { path: '/pelicula/editar:id', componente: EditarPelicula },
-    { path: '/pelicula/filtrar', componente: FiltroPelioculas },
+    { path: '/actores/editar/:id(\\d+)', componente: EditarActores },
+    { path: '/actores', componente: IndiceActores, exact: true },
+    
+    { path: '/cines/crear', componente: CrearCine },
+    { path: '/cines/editar/:id(\\d+)', componente: EditarCine },
+    { path: '/cines', componente: IndiceCine, exact: true },
+    
+    { path: '/peliculas/crear', componente: CrearPelicula },
+    { path: '/peliculas/editar/:id(\\d+)', componente: EditarPelicula },
+    { path: '/peliculas/filtrar', componente: FiltroPelioculas },
+    
+    { path: '/', componente: LandingPage, exact: true },
     { path: '*', componente: RedireccionarALanding },
-
 ]
 
 
 interface ruta {
     path: string;
     componente: any;
+    exact?: boolean;
 } 
 export default rutas;

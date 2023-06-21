@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function IndiceActores() {
     return (<>
-    <h3>Índice Actores</h3>
-    <Link to="/actores/crear">Crear Actor</Link>
-    <Link to="/actores/editar">Editar Actor</Link>
+        <h3>Índice Actores</h3>
+        <Link to="/actores/crear">Crear Actor</Link>
+        <Link to="/actores/editar">Editar Actor</Link>
     </>)
 }

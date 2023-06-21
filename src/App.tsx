@@ -1,21 +1,25 @@
+import React from 'react';
 import './App.css';
 import Menu from './utils/Menu';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import rutas from './route-config';
+import rutas from './route-config'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 function App() {
-
   return (
     <>
-      <div className='container'>
-        <BrowserRouter>
-          <Menu />
-          <Routes>
-            {rutas.map(ruta => <Route key={ruta.path} path={ruta.path} element={<ruta.componente />} > </Route>)}
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Menu />
+        <div className="container">
+          <Switch>
+            {rutas.map(ruta => 
+            <Route key={ruta.path} path={ruta.path} exact={ruta.exact}>
+                <ruta.componente />
+              </Route>)}
+          </Switch>
+        </div>
+      </BrowserRouter>
     </>
+
   );
 }
 
