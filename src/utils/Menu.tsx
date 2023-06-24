@@ -1,7 +1,6 @@
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 export default function Menu() {
-    const claseActiva = "active";
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">

@@ -8,21 +8,22 @@ export default function LandingPage() {
     useEffect(() => {
         const timerId = setTimeout(() => {
             setPeliculas({
-                enCartelera: [{
-                    id: 1,
-                    titulo: "SpiderMan",
-                    poster: "https://pics.filmaffinity.com/Spider_Man_Cruzando_el_Multiverso-647400416-large.jpg"
-                },
-                {
-                    id: 2,
-                    titulo: "Shrek",
-                    poster: "https://pics.filmaffinity.com/Shrek-903764423-large.jpg"
-                },
-                {
-                    id: 3,
-                    titulo: "Cars",
-                    poster: "https://es.web.img2.acsta.net/pictures/17/06/09/13/42/187933.jpg"
-                }],
+                enCartelera: [
+                    {
+                        id: 1,
+                        titulo: "Spiderman",
+                        poster: "https://m.media-amazon.com/images/I/61-rozyeQQL._AC_SL1000_.jpg"
+                    },
+                    {
+                        id: 2,
+                        titulo: "Shrek",
+                        poster: "https://www.mirax.cl/productos/n240001a250000/n246001a247000/n246201a246300/g246270.jpg"
+                    },
+                    {
+                        id: 3,
+                        titulo: "Cars",
+                        poster: "https://es.web.img2.acsta.net/pictures/17/06/09/13/42/187933.jpg"
+                    }],
                 proximosEstrenos: [
                     {
                         id: 1,

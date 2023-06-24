@@ -10,7 +10,7 @@ export default function FormGroupText(props: formGroupTextProps) {
             placeholder={props.placeholder}
         />
         <ErrorMessage name={props.campo}>
-            {mensaje => <MostrarErrorCampo mensaje={mensaje} />}
+            {(mensaje: any) => <MostrarErrorCampo mensaje={mensaje} />}
         </ErrorMessage>
     </div>)
 }
