@@ -1,5 +1,5 @@
 /* import { useParams } from "react-router-dom"; */
-import FormularioGeneros from "./FormulariGeneros";
+import FormularioGeneros from "./FormularioGeneros";
 
 export default function EditarGenero() {
 

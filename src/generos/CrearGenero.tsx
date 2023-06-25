@@ -1,4 +1,4 @@
-import FormularioGeneros from "./FormulariGeneros";
+import FormularioGeneros from "./FormularioGeneros";
 
 export default function CrearGenero() {
     /* const history = useHistory(); */

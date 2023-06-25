@@ -1,6 +1,4 @@
-import { FormikHelpers } from "formik";
 import FormularioActores from "./FormularioActores";
-import { actorCreacionDTO } from "./actores.model";
 
 export default function CrearActores() {
     return (<>
