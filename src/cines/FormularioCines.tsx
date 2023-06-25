@@ -1,12 +1,11 @@
 import { Form, Formik, FormikHelpers } from "formik";
-import { cineCreacionDTO } from "./cines.model"
-import * as Yup from 'yup';
-import FormGroupText from "../utils/FormGroupText";
-import Button from "../utils/Button";
 import { Link } from "react-router-dom";
-import Mapa from "../utils/Mapa";
+import * as Yup from 'yup';
+import Button from "../utils/Button";
+import FormGroupText from "../utils/FormGroupText";
 import MapaFormulario from "../utils/MapaFormulario";
 import { coordenadasDTO } from "../utils/coordenadas.models";
+import { cineCreacionDTO } from "./cines.model";
 
 export default function FormularioCines(props: formularioCinesProps) {
 
