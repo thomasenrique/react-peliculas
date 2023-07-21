@@ -16,4 +16,5 @@ export interface peliculaCreacionDTO {
     fechaLanzamiento?: Date;
     poster?: File;
     posterURL?: string;
+    generosIds?: number[];
 }
