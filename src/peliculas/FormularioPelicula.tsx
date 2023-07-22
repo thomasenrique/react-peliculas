@@ -12,8 +12,14 @@ import { generoDTO } from "../generos/generos.models";
 import { useState } from "react";
 import { cineDTO } from "../cines/cines.model";
 import TypeAheadActores from "../actores/TypeAheadActores";
+import { actoresPeliculasDTO } from "../actores/actores.model";
 
 export default function FormularioPeliculas(props: formularioPeliculasProps) {
+
+    /* Actores */
+
+    const [actoresSeleccionados, setActoresSeleccionados] =
+        useState<actoresPeliculasDTO[]>(props.actoresSeleccionados);
 
     /* Generos */
     const [generosSeleccionados, setGenerosSeleccionados] =
@@ -42,6 +48,7 @@ export default function FormularioPeliculas(props: formularioPeliculasProps) {
             onSubmit={(valores, acciones) => {
                 valores.generosIds = generosSeleccionados.map(valor => valor.llave);
                 valores.cinesIds = cinesSeleccionados.map(valor => valor.llave);
+                valores.actores = actoresSeleccionados;
                 props.onSubmit(valores, acciones)
             }}
             validationSchema={Yup.object({
@@ -81,7 +88,29 @@ export default function FormularioPeliculas(props: formularioPeliculasProps) {
 
                     <div className="form-group">
                         <TypeAheadActores
-                            actores={[]}
+                            onAdd={actores => {
+                                setActoresSeleccionados(actores);
+                            }}
+                            onRemove={actor => {
+                                const actores = actoresSeleccionados.filter(x => x !== actor);
+                                setActoresSeleccionados(actores);
+                            }}
+                            actores={actoresSeleccionados}
+                            listadoUI={(actor: actoresPeliculasDTO) =>
+                                <>
+                                    {actor.nombre} / <input placeholder="Personaje"
+                                        type="text" value={actor.personaje}
+                                        onChange={e => {
+                                            const indice = actoresSeleccionados.findIndex(x => x.id === actor.id)
+                                            const actores = [...actoresSeleccionados];
+                                            actores[indice].personaje = e.currentTarget.value;
+                                            setActoresSeleccionados(actores);
+
+                                        }}
+                                    />
+
+                                </>
+                            }
                         />
                     </div>
 
@@ -101,4 +130,5 @@ interface formularioPeliculasProps {
     generosNoSeleccionados: generoDTO[];
     cinesSeleccionados: cineDTO[];
     cinesNoSeleccionados: cineDTO[];
+    actoresSeleccionados: actoresPeliculasDTO[];
 }

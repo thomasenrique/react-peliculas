@@ -1,5 +1,7 @@
 import { Typeahead } from "react-bootstrap-typeahead";
 import { actoresPeliculasDTO } from "./actores.model";
+import { ReactElement } from "react-markdown/lib/react-markdown";
+import { useState } from "react";
 
 export default function TypeAheadActores(props: typeAheadActoresProps) {
 
@@ -9,14 +11,48 @@ export default function TypeAheadActores(props: typeAheadActoresProps) {
         { id: 3, nombre: "ei arnol", personaje: "Terminator", foto: "https://media.gq.com.mx/photos/5d7004742cd751000855722e/16:9/w_2560%2Cc_limit/arnold1.jpg" }
     ];
 
+    const seleccion: actoresPeliculasDTO[] = [];
+
+    const [elementoArrastrado, setElementoArrastrado] =
+        useState<actoresPeliculasDTO | undefined>(undefined);
+
+    function handleDragStart(actor: actoresPeliculasDTO) {
+        setElementoArrastrado(actor);
+    }
+
+    function manejarDragOver(actor: actoresPeliculasDTO) {
+        if (!elementoArrastrado) {
+            return;
+        }
+
+        if (actor.id !== elementoArrastrado.id) {
+            /* primero buscamos al actor que se esta moviendo */
+            const elementoArrastradoIndice = props.actores.findIndex(x => x.id === elementoArrastrado.id);
+
+            /* luego buscamos el indice del actor que sacaremos para dar esa posicion al elemetroArrastrado*/
+            const actorIndice = props.actores.findIndex(x => x.id === actor.id);
+
+
+            const actores = [...props.actores];
+
+            actores[actorIndice] = elementoArrastrado;
+            actores[elementoArrastradoIndice] = actor;
+            props.onAdd(actores);
+
+        }
+    }
+
+
 
     return (
         <>
             <label>Actores</label>
             <Typeahead
                 id="typeahead"
-                onChange={actor => {
-                    console.log(actor)
+                onChange={actores => {
+                    if (props.actores.findIndex(x => x.id === actores[0].id) === -1) {
+                        props.onAdd([...props.actores, actores[0]])
+                    }
                 }}
                 options={actores}
                 labelKey={actor => actor.nombre}
@@ -24,11 +60,47 @@ export default function TypeAheadActores(props: typeAheadActoresProps) {
                 placeholder="Escriba el nombre del actor"
                 minLength={2}
                 flip={true}
+                selected={seleccion}
+                renderMenuItemChildren={actor => (
+                    <>
+                        <img alt="Imagen actor" src={actor.foto}
+                            style={{
+                                height: '64px',
+                                marginRight: '10px',
+                                width: '64px'
+                            }}
+                        />
+                        <span>{actor.nombre}</span>
+                    </>
+                )}
             />
+
+            <ul className="list-group">
+                {props.actores.map(actor => <li
+                    draggable={true}
+                    onDragStart={() => handleDragStart(actor)}
+                    onDragOver={() => manejarDragOver(actor)}
+                    key={actor.id}
+                    className="list-group-item list-group-item-action"
+                >
+                    {props.listadoUI(actor)}
+                    <span
+                        className="badge badge-primary badge-pill pointer"
+                        style={{ marginLeft: '.5rem' }}
+                        onClick={() => props.onRemove(actor)}
+                    >
+                        X
+                    </span>
+                </li>)}
+            </ul>
+
         </>
     )
 }
 
 interface typeAheadActoresProps {
     actores: actoresPeliculasDTO[];
+    onAdd(actores: actoresPeliculasDTO[]): void;
+    listadoUI(actor: actoresPeliculasDTO): ReactElement;
+    onRemove(actor: actoresPeliculasDTO): void;
 }
